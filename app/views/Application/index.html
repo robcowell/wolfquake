@@ -1,4 +1,11 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+<h1>WolfQuake</h1>
+<h3>A quick and dirty earthquake mapping app</h3>
+
+#{form @getLocation(), id:'inputForm'}
+
+<label>Location<input type="text" id="location" name="location"></label>
+
+#{/form}

@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+<table border="1">
+<thead>
+	<th>ID</th>
+	<th>Magnitude</th>
+	<th>Date/Time</th>
+	<th>Coords</th>
+	<th>Depth</th>
+</thead>
+<tbody>
+ #{list quakelist, as:'quake'}
+
+                <tr>                
+                 		<td>${quake.eqid}</td>
+                 		<td>${quake.magnitude}</td>
+                 		<td>${quake.datetime}</td>
+                 		<td>${quake.lat},${quake.lng}</td>
+                 		<td>${quake.depth}</td>
+                </tr>
+
+                #{/list}
+                </tbody>
+                </table>
