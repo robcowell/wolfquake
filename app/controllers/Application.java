@@ -38,10 +38,10 @@ public class Application extends Controller {
     
     public static void getQuakes(double latitude, double longitude)
     {
-	double north = latitude+5;
-	double south = latitude-5;
-	double east = longitude-5;
-	double west = longitude+5;
+	double north = latitude+2;
+	double south = latitude-2;
+	double east = longitude+2;
+	double west = longitude-2;
 	
 	String url =  "http://api.geonames.org/earthquakesJSON?north=" + north + "&south=" + south + "&east=" + east + "&west=" + west + "&username=robjcowell";
 	HttpResponse res = WS.url(url).get();
