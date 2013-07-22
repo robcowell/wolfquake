@@ -15,27 +15,29 @@ function initialize() {
 	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	  }
 	  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	  	  addMarkers(map);
-
-	}
-
-	function addMarkers(map)
-	{
-		 #{list quakelist, as:'quake'}
-		 var infowindow = new google.maps.InfoWindow({
-		      content: 'Magnitude ${quake.magnitude} at ${quake.datetime}, at a depth of ${quake.depth} km'
-		  });
-
-			var marker = new google.maps.Marker({
+	  var markers = new Array();
+	  var infowindow = new google.maps.InfoWindow();
+	  #{list quakelist, as:'quake'}
+	  	 var info = 'Magnitude ${quake.magnitude} at ${quake.datetime}, at a depth of ${quake.depth} km';
+		 var marker = new google.maps.Marker({
 		      position: new google.maps.LatLng(${quake.lat},${quake.lng}),
 		      map: map,
-		      title: 'Hello World!'
+		      desc: info,
+		      animation: google.maps.Animation.DROP
 		  });
-			google.maps.event.addListener(marker, 'click', function() {
-			    infowindow.open(map,marker);
-			  });
-			#{/list}
+		 markers.push(marker);
+			
+		#{/list}
+		for(var i = 0; i < markers.length; i++)
+			{
+				var marker = markers[i];
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(this.desc);
+					infowindow.open(map,this);
+				});
+			}
 	}
+
 	google.maps.event.addDomListener(window, 'load', initialize);
 
 
