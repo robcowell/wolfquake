@@ -15,13 +15,24 @@ function initialize() {
 	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	  }
 	  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	  
 	  var markers = new Array();
+	  var searchMarker = new google.maps.Marker({
+		  position: myLatlng,
+		  map: map,
+		  desc: 'Search center'
+	  });
+	  markers.push(searchMarker);
+	  
 	  var infowindow = new google.maps.InfoWindow();
 	  #{list quakelist, as:'quake'}
 	  	 var info = 'Magnitude ${quake.magnitude} at ${quake.datetime}, at a depth of ${quake.depth} km';
+	  	 var iconbase = 'http://www.google.com/mapfiles/ms/micons/';
 		 var marker = new google.maps.Marker({
 		      position: new google.maps.LatLng(${quake.lat},${quake.lng}),
 		      map: map,
+		      icon: iconbase + 'earthquake.png',
+		      shadow: iconbase + 'earthquake.shadow.png',
 		      desc: info,
 		      animation: google.maps.Animation.DROP
 		  });
